@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upwise – Marketing Digital que Genera Resultados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-card: #16161f;
+            --bg-card-hover: #1c1c28;
+            --accent-lime: #b8ff57;
+            --accent-lime-dim: rgba(184, 255, 87, 0.15);
+            --accent-cyan: #57d9ff;
+            --accent-magenta: #ff57b8;
+            --text-primary: #f0f0f5;
+            --text-secondary: #9494a8;
+            --text-muted: #6b6b80;
+            --border: rgba(255,255,255,0.06);
+            --gradient-hero: linear-gradient(135deg, #b8ff57 0%, #57d9ff 50%, #ff57b8 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ─── NOISE OVERLAY ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ─── NAVIGATION ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,15,0.8);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-lime);
+        }
+
+        .nav-cta {
+            background: var(--accent-lime);
+            color: #0a0a0f;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(184,255,87,0.3);
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero-bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .hero-bg-glow.glow-1 {
+            top: 10%;
+            left: 10%;
+            background: var(--accent-lime);
+        }
+
+        .hero-bg-glow.glow-2 {
+            bottom: 10%;
+            right: 10%;
+            background: var(--accent-cyan);
+        }
+
+        .hero-bg-glow.glow-3 {
+            top: 40%;
+            right: 30%;
+            background: var(--accent-magenta);
+            opacity: 0.1;
+            width: 400px;
+            height: 400px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 1s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-lime-dim);
+            border: 1px solid rgba(184,255,87,0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--accent-lime);
+            margin-bottom: 2rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-lime);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .hero h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .gradient-text {
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent-lime);
+            color: #0a0a0f;
+            padding: 1rem 2.4rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(184,255,87,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 1rem 2.4rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-lime);
+            color: var(--accent-lime);
+        }
+
+        /* ─── STATS BAR ─── */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 3rem 2rem;
+            flex-wrap: wrap;
+            animation: fadeUp 1s ease-out 0.3s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ─── SECTIONS ─── */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent-lime);
+            margin-bottom: 1rem;
+        }
+
+        .section-tag::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--accent-lime);
+        }
+
+        .section-title {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        /* ─── ABOUT ─── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-circle {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-card-hover));
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .about-circle-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-circle-text {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-lime);
+        }
+
+        .about-orbit {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255,255,255,0.06);
+            animation: spin 40s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .orbit-dot {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .orbit-dot:nth-child(1) { top: -20px; left: 50%; transform: translateX(-50%); }
+        .orbit-dot:nth-child(2) { bottom: -20px; left: 50%; transform: translateX(-50%); }
+        .orbit-dot:nth-child(3) { left: -20px; top: 50%; transform: translateY(-50%); }
+        .orbit-dot:nth-child(4) { right: -20px; top: 50%; transform: translateY(-50%); }
+
+        .about-text h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .about-highlight {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .about-highlight-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-lime-dim);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        /* ─── SERVICES ─── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(184,255,87,0.15);
+            background: var(--bg-card-hover);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-lime-dim);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.01em;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* ─── CASE STUDIES ─── */
+        .cases-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .case-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-card::after {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            border-radius: 24px;
+            background: var(--gradient-hero);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .case-card:hover::after {
+            opacity: 0.08;
+        }
+
+        .case-card:hover {
+            border-color: rgba(184,255,87,0.1);
+        }
+
+        .case-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .case-type {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent-cyan);
+            margin-bottom: 0.8rem;
+        }
+
+        .case-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.02em;
+        }
+
+        .case-situation {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .case-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .case-action-tag {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .case-results {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .case-result {
+            background: rgba(184,255,87,0.05);
+            border: 1px solid rgba(184,255,87,0.1);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .result-value {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-lime);
+            white-space: nowrap;
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.4;
+        }
+
+        .case-timeline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1rem;
+            padding: 0.4rem 1rem;
+            background: rgba(87,217,255,0.08);
+            border-radius: 50px;
+            font-size: 0.82rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        /* ─── METHODOLOGY ─── */
+        .method-steps {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .method-step {
+            flex: 1;
+            min-width: 200px;
+            max-width: 220px;
+            text-align: center;
+            padding: 2rem 1.2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .method-step:hover {
+            transform: translateY(-4px);
+            border-color: rgba(184,255,87,0.15);
+        }
+
+        .method-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .method-step h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .method-step p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ─── PRICING ─── */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .pricing-card.featured {
+            border-color: rgba(184,255,87,0.3);
+            background: linear-gradient(180deg, rgba(184,255,87,0.06) 0%, var(--bg-card) 50%);
+        }
+
+        .pricing-popular {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-lime);
+            color: #0a0a0f;
+            padding: 0.35rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .pricing-name {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .pricing-desc {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-amount {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+            letter-spacing: -0.03em;
+        }
+
+        .pricing-amount .currency {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            vertical-align: super;
+        }
+
+        .pricing-period {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-divider {
+            height: 1px;
+            background: var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent-lime);
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .pricing-btn {
+            display: block;
+            text-align: center;
+            padding: 0.9rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .pricing-btn.primary {
+            background: var(--accent-lime);
+            color: #0a0a0f;
+        }
+
+        .pricing-btn.primary:hover {
+            box-shadow: 0 8px 30px rgba(184,255,87,0.3);
+            transform: translateY(-2px);
+        }
+
+        .pricing-btn.outline {
+            border: 1px solid rgba(255,255,255,0.15);
+            color: var(--text-primary);
+        }
+
+        .pricing-btn.outline:hover {
+            border-color: var(--accent-lime);
+            color: var(--accent-lime);
+        }
+
+        /* ─── CTA / CONTACT ─── */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem 8rem;
+            position: relative;
+        }
+
+        .cta-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: var(--accent-lime);
+            filter: blur(200px);
+            opacity: 0.08;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .cta-section .section-title {
+            max-width: 700px;
+            margin: 0 auto 1rem;
+        }
+
+        .cta-section .section-desc {
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .contact-cards {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s;
+            min-width: 260px;
+        }
+
+        .contact-card:hover {
+            border-color: rgba(184,255,87,0.2);
+            transform: translateY(-3px);
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-icon.email { background: rgba(87,217,255,0.12); }
+        .contact-icon.whatsapp { background: rgba(37,211,102,0.12); }
+        .contact-icon.location { background: rgba(255,87,184,0.12); }
+
+        .contact-info-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .contact-info-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        footer span {
+            color: var(--accent-lime);
+            font-weight: 600;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; text-align: center; }
+            .about-visual { display: none; }
+            .services-grid { grid-template-columns: 1fr; }
+            .case-card { grid-template-columns: 1fr; gap: 1.5rem; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .method-steps { flex-direction: column; align-items: center; }
+            .stats-bar { gap: 2rem; }
+            .contact-cards { flex-direction: column; align-items: center; }
+        }
+
+        /* ─── HERO TRUST BAR ─── */
+        .hero-trust {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .hero-trust-item {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ─── PULSE CTA ─── */
+        .btn-pulse {
+            position: relative;
+            animation: btnGlow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes btnGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(184,255,87,0.4); }
+            50% { box-shadow: 0 0 30px 8px rgba(184,255,87,0.25); }
+        }
+
+        /* ─── BEFORE/AFTER VISUAL ─── */
+        .ba-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ba-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .ba-card {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .ba-card-header {
+            padding: 1.2rem 1.5rem 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .ba-card-icon {
+            font-size: 1.3rem;
+        }
+
+        .ba-card-title {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .ba-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .ba-before, .ba-after {
+            padding: 1.2rem 1.5rem 1.5rem;
+        }
+
+        .ba-before {
+            background: rgba(255,70,70,0.04);
+            border-right: 1px solid var(--border);
+        }
+
+        .ba-after {
+            background: rgba(184,255,87,0.04);
+        }
+
+        .ba-label {
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .ba-before .ba-label { color: #ff6b6b; }
+        .ba-after .ba-label { color: var(--accent-lime); }
+
+        .ba-metric {
+            margin-bottom: 0.7rem;
+        }
+
+        .ba-metric-value {
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .ba-before .ba-metric-value { color: #ff6b6b; }
+        .ba-after .ba-metric-value { color: var(--accent-lime); }
+
+        .ba-metric-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ─── SOCIAL PROOF TICKER ─── */
+        .social-proof {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .testimonial-stars {
+            color: #fbbf24;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .testimonial-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .testimonial-avatar.t1 { background: rgba(87,217,255,0.15); color: var(--accent-cyan); }
+        .testimonial-avatar.t2 { background: rgba(184,255,87,0.15); color: var(--accent-lime); }
+        .testimonial-avatar.t3 { background: rgba(255,87,184,0.15); color: var(--accent-magenta); }
+
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+
+        .testimonial-result-badge {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(184,255,87,0.1);
+            border: 1px solid rgba(184,255,87,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent-lime);
+        }
+
+        /* ─── FLOATING CTA ─── */
+        .floating-cta {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #25D366;
+            color: white;
+            padding: 1rem 1.6rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+            animation: floatBounce 3s ease-in-out infinite;
+        }
+
+        .floating-cta:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 40px rgba(37,211,102,0.5);
+        }
+
+        @keyframes floatBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .floating-cta-dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* ─── GUARANTEE BAR ─── */
+        .guarantee-bar {
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .guarantee-box {
+            background: linear-gradient(135deg, rgba(184,255,87,0.06), rgba(87,217,255,0.06));
+            border: 1px solid rgba(184,255,87,0.15);
+            border-radius: 20px;
+            padding: 2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .guarantee-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .guarantee-text h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--accent-lime);
+        }
+
+        .guarantee-text p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .ba-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .guarantee-box { flex-direction: column; text-align: center; }
+            .floating-cta { bottom: 1rem; right: 1rem; padding: 0.8rem 1.2rem; font-size: 0.85rem; }
+            .hero-trust { gap: 0.8rem; }
+        }
+
+        @media (max-width: 1024px) {
+            .ba-grid { grid-template-columns: 1fr 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ─── SCROLL ANIMATIONS ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-logo">UPWISE</div>
+        <ul class="nav-links">
+            <li><a href="#sobre-mi">Sobre Mí</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#casos">Resultados</a></li>
+            <li><a href="#planes">Planes</a></li>
+        </ul>
+        <a href="https://wa.me/5411278526291?text=Hola!%20Quiero%20solicitar%20mi%20consulta%20gratuita" class="nav-cta">🔍 Consulta Gratis</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg-glow glow-1"></div>
+        <div class="hero-bg-glow glow-2"></div>
+        <div class="hero-bg-glow glow-3"></div>
+        <div class="hero-content">
+            <h1>
+                Ayudo a pequeños negocios a<br>
+                <span class="gradient-text">conseguir más clientes</span><br>
+                con estrategias digitales
+            </h1>
+            <p class="hero-sub">
+                Más seguidores reales. Más interacción. Más ventas orgánicas en Instagram. Sin depender de publicidad paga.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/5411278526291?text=Hola!%20Quiero%20solicitar%20mi%20consulta%20gratuita" class="btn-primary btn-pulse">
+                    🔍 Solicitar consulta GRATIS →
+                </a>
+                <a href="#casos" class="btn-secondary">Ver resultados reales ↓</a>
+            </div>
+            <div class="hero-trust">
+                <div class="hero-trust-item">✅ Sin compromiso</div>
+                <div class="hero-trust-item">⚡ Respuesta en 24h</div>
+                <div class="hero-trust-item">📊 Diagnóstico personalizado</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">+45%</div>
+            <div class="stat-label">Más Reservas</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">4X</div>
+            <div class="stat-label">ROI Promedio</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">+70%</div>
+            <div class="stat-label">Más Ventas</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">+3.2K</div>
+            <div class="stat-label">Seguidores Orgánicos</div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="sobre-mi" class="reveal">
+        <div class="about-grid">
+            <div class="about-visual">
+                <div class="about-orbit">
+                    <div class="orbit-dot">📱</div>
+                    <div class="orbit-dot">📊</div>
+                    <div class="orbit-dot">🎯</div>
+                    <div class="orbit-dot">🚀</div>
+                </div>
+                <div class="about-circle">
+                    <div class="about-circle-icon">⚡</div>
+                    <div class="about-circle-text">UPWISE</div>
+                </div>
+            </div>
+            <div class="about-text">
+                <div class="section-tag">Sobre mí</div>
+                <h3>Marketing en Instagram que se traduce en resultados reales</h3>
+                <p>
+                    Soy especialista en estrategia de contenido y crecimiento orgánico en Instagram. Ayudo a emprendedores y creadores de contenido a construir una presencia profesional que atraiga clientes de forma genuina — sin depender de publicidad paga.
+                </p>
+                <p>
+                    Trabajo con estrategias prácticas orientadas a resultados medibles: más seguidores reales, más interacción y más ventas a través de contenido que conecta.
+                </p>
+                <div class="about-highlights">
+                    <div class="about-highlight">
+                        <div class="about-highlight-icon">🎯</div>
+                        Estrategia orientada a conversión
+                    </div>
+                    <div class="about-highlight">
+                        <div class="about-highlight-icon">📈</div>
+                        Reportes mensuales con datos reales
+                    </div>
+                    <div class="about-highlight">
+                        <div class="about-highlight-icon">🤝</div>
+                        Comunicación directa y constante
+                    </div>
+                    <div class="about-highlight">
+                        <div class="about-highlight-icon">⚡</div>
+                        Resultados desde el primer mes
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="servicios" class="reveal">
+        <div class="section-tag">Servicios</div>
+        <h2 class="section-title">Todo lo que tu marca<br>necesita para crecer</h2>
+        <p class="section-desc">Soluciones integrales de contenido y crecimiento orgánico en Instagram para emprendedores y creadores.</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Gestión de Redes Sociales</h3>
+                <p>Manejo integral de tus perfiles en Instagram y Facebook con contenido estratégico que conecta con tu audiencia.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Creación de Contenido</h3>
+                <p>Contenido visual de alto impacto: posts, carruseles, stories y piezas gráficas profesionales para tu marca.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎬</div>
+                <h3>Edición de Reels</h3>
+                <p>Videos cortos con tendencias actuales, transiciones dinámicas y hooks que captan la atención desde el segundo 1.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3>Estrategia de Crecimiento en Instagram</h3>
+                <p>Plan de crecimiento orgánico con hashtags, colaboraciones, tendencias y técnicas para aumentar tu alcance sin pagar publicidad.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Optimización de Perfiles</h3>
+                <p>Perfiles comerciales optimizados para convertir visitantes en clientes: bio, highlights, catálogo y llamados a la acción.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Estrategia y Análisis</h3>
+                <p>Análisis de métricas, competencia y audiencia para tomar decisiones basadas en datos reales, no en suposiciones.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="casos" class="reveal">
+        <div class="section-tag">Resultados comprobados</div>
+        <h2 class="section-title">Proyectos que hablan<br>por sí solos</h2>
+        <p class="section-desc">Cada caso refleja una estrategia personalizada con resultados medibles y reales.</p>
+
+        <div class="cases-grid">
+            <!-- Case 1 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-type">🍽️ Gastronomía</div>
+                    <h3>Restaurante Local — Incremento en Reservas</h3>
+                    <p class="case-situation">El restaurante tenía redes sociales activas pero sin estrategia clara. Los seguidores no se convertían en clientes reales.</p>
+                    <div class="case-actions">
+                        <span class="case-action-tag">Calendario de contenido</span>
+                        <span class="case-action-tag">3 Reels semanales</span>
+                        <span class="case-action-tag">Estrategia de hashtags</span>
+                        <span class="case-action-tag">Optimización Instagram</span>
+                    </div>
+                    <div class="case-timeline">⏱ Resultados en 60 días</div>
+                </div>
+                <div class="case-results">
+                    <div class="case-result">
+                        <div class="result-value">+45%</div>
+                        <div class="result-label">Incremento en reservas</div>
+                    </div>
+                    <div class="case-result">
+                        <div class="result-value">+1.200</div>
+                        <div class="result-label">Nuevos seguidores</div>
+                    </div>
+                    <div class="case-result">
+                        <div class="result-value">-35%</div>
+                        <div class="result-label">Costo por mensaje reducido</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-type">💈 Barbería</div>
+                    <h3>Barbería — Aumento de Clientes Nuevos</h3>
+                    <p class="case-situation">Dependía exclusivamente del boca a boca. Sin presencia digital ni identidad visual definida.</p>
+                    <div class="case-actions">
+                        <span class="case-action-tag">Identidad visual</span>
+                        <span class="case-action-tag">Videos antes/después</span>
+                        <span class="case-action-tag">Estrategia de contenido local</span>
+                        <span class="case-action-tag">Automatización</span>
+                    </div>
+                    <div class="case-timeline">⏱ Resultados en 30 días</div>
+                </div>
+                <div class="case-results">
+                    <div class="case-result">
+                        <div class="result-value">+60</div>
+                        <div class="result-label">Clientes nuevos</div>
+                    </div>
+                    <div class="case-result">
+                        <div class="result-value">3 sem.</div>
+                        <div class="result-label">Agenda llena consecutiva</div>
+                    </div>
+                    <div class="case-result">
+                        <div class="result-value">4X</div>
+                        <div class="result-label">Retorno de inversión</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 3 -->
+            <div class="case-card">
+                <div class="case-header">
+                    <div class="case-type">👗 Moda</div>
+                    <h3>Tienda de Ropa — Ventas Online</h3>
+                    <p class="case-situation">Tenía una comunidad de seguidores pero las ventas eran mínimas. Faltaba estrategia de conversión.</p>
+                    <div class="case-actions">
+                        <span class="case-action-tag">Contenido emocional</span>
+                        <span class="case-action-tag">Reels con tendencias</span>
+                        <span class="case-action-tag">Stories con llamados a la acción</span>
+                        <span class="case-action-tag">Catálogo optimizado</span>
+                    </div>
+                    <div class="case-timeline">⏱ Resultados en 45 días</div>
+                </div>
+                <div class="case-results">
+                    <div class="case-result">
+                        <div class="result-value">+70%</div>
+                        <div class="result-label">Incremento en ventas</div>
+                    </div>
+                    <div class="case-result">
+                        <div class="result-value">+25%</div>
+                        <div class="result-label">Ticket promedio más alto</div>
+                    </div>
+                    <div class="case-result">
+                        <div class="result-value">+2.000</div>
+                        <div class="result-label">Seguidores orgánicos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE / AFTER -->
+    <section class="ba-section reveal">
+        <div style="text-align:center; margin-bottom: 1rem;">
+            <div class="section-tag" style="justify-content:center;">Antes vs. Después</div>
+            <h2 class="section-title" style="margin: 0 auto 1rem;">El impacto real de una<br>buena estrategia</h2>
+            <p class="section-desc" style="margin: 0 auto;">Así se ve la diferencia cuando tu marketing deja de ser improvisado.</p>
+        </div>
+
+        <div class="ba-grid">
+            <!-- Restaurante -->
+            <div class="ba-card">
+                <div class="ba-card-header">
+                    <span class="ba-card-icon">🍽️</span>
+                    <span class="ba-card-title">Restaurante Local</span>
+                </div>
+                <div class="ba-comparison">
+                    <div class="ba-before">
+                        <div class="ba-label">✕ Antes</div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">12</div>
+                            <div class="ba-metric-label">reservas / semana</div>
+                        </div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">800</div>
+                            <div class="ba-metric-label">seguidores</div>
+                        </div>
+                    </div>
+                    <div class="ba-after">
+                        <div class="ba-label">✓ Después</div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">22</div>
+                            <div class="ba-metric-label">reservas / semana</div>
+                        </div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">2.000</div>
+                            <div class="ba-metric-label">seguidores</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barbería -->
+            <div class="ba-card">
+                <div class="ba-card-header">
+                    <span class="ba-card-icon">💈</span>
+                    <span class="ba-card-title">Barbería</span>
+                </div>
+                <div class="ba-comparison">
+                    <div class="ba-before">
+                        <div class="ba-label">✕ Antes</div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">~8</div>
+                            <div class="ba-metric-label">clientes nuevos / mes</div>
+                        </div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">50%</div>
+                            <div class="ba-metric-label">agenda ocupada</div>
+                        </div>
+                    </div>
+                    <div class="ba-after">
+                        <div class="ba-label">✓ Después</div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">60+</div>
+                            <div class="ba-metric-label">clientes nuevos / mes</div>
+                        </div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">100%</div>
+                            <div class="ba-metric-label">agenda completa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tienda Ropa -->
+            <div class="ba-card">
+                <div class="ba-card-header">
+                    <span class="ba-card-icon">👗</span>
+                    <span class="ba-card-title">Tienda de Ropa</span>
+                </div>
+                <div class="ba-comparison">
+                    <div class="ba-before">
+                        <div class="ba-label">✕ Antes</div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">$180K</div>
+                            <div class="ba-metric-label">ventas mensuales</div>
+                        </div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">3.500</div>
+                            <div class="ba-metric-label">seguidores</div>
+                        </div>
+                    </div>
+                    <div class="ba-after">
+                        <div class="ba-label">✓ Después</div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">$306K</div>
+                            <div class="ba-metric-label">ventas mensuales</div>
+                        </div>
+                        <div class="ba-metric">
+                            <div class="ba-metric-value">5.500</div>
+                            <div class="ba-metric-label">seguidores</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF / TESTIMONIALS -->
+    <section class="social-proof reveal">
+        <div style="text-align:center; margin-bottom: 1rem;">
+            <div class="section-tag" style="justify-content:center;">Lo que dicen mis clientes</div>
+            <h2 class="section-title" style="margin: 0 auto 1rem;">Resultados que generan<br>confianza</h2>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-result-badge">+45% reservas</div>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Pensé que con solo publicar ya era suficiente. Me armó una estrategia real y en dos meses las reservas se dispararon. Ahora los fines de semana están completos."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar t1">MR</div>
+                    <div>
+                        <div class="testimonial-name">Martín R.</div>
+                        <div class="testimonial-role">Dueño de restaurante</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-result-badge">ROI 4X</div>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Pasé de depender solo de mis clientes de siempre a tener agenda llena tres semanas seguidas. La inversión se pagó sola desde el primer mes."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar t2">LC</div>
+                    <div>
+                        <div class="testimonial-name">Lucas C.</div>
+                        <div class="testimonial-role">Barbero independiente</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-result-badge">+70% ventas</div>
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Tenía muchos seguidores pero no vendía. Me ayudó a convertir esa audiencia en clientes de verdad. El ticket promedio también subió, no lo podía creer."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar t3">SF</div>
+                    <div>
+                        <div class="testimonial-name">Sofía F.</div>
+                        <div class="testimonial-role">Tienda de ropa online</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GUARANTEE -->
+    <div class="guarantee-bar reveal">
+        <div class="guarantee-box">
+            <div class="guarantee-icon">🛡️</div>
+            <div class="guarantee-text">
+                <h3>Consulta estratégica gratuita, sin compromiso</h3>
+                <p>Analizo tu perfil, tu contenido y tu competencia gratis. Si no te convence la estrategia que te propongo, no pagás nada. Así de simple.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- METHODOLOGY -->
+    <section id="metodologia" class="reveal">
+        <div style="text-align:center; margin-bottom: 3rem;">
+            <div class="section-tag" style="justify-content:center;">Metodología</div>
+            <h2 class="section-title" style="margin: 0 auto 1rem;">Cómo trabajo</h2>
+            <p class="section-desc" style="margin: 0 auto;">Un proceso claro y transparente en 5 pasos para llevar tu Instagram al siguiente nivel.</p>
+        </div>
+
+        <div class="method-steps">
+            <div class="method-step">
+                <div class="method-number">01</div>
+                <h3>Análisis</h3>
+                <p>Estudio tu perfil, competencia y audiencia a fondo.</p>
+            </div>
+            <div class="method-step">
+                <div class="method-number">02</div>
+                <h3>Objetivo</h3>
+                <p>Definimos metas claras: seguidores, ventas o comunidad.</p>
+            </div>
+            <div class="method-step">
+                <div class="method-number">03</div>
+                <h3>Contenido</h3>
+                <p>Creación de contenido estratégico y visual.</p>
+            </div>
+            <div class="method-step">
+                <div class="method-number">04</div>
+                <h3>Publicación</h3>
+                <p>Calendario estratégico y publicación consistente.</p>
+            </div>
+            <div class="method-step">
+                <div class="method-number">05</div>
+                <h3>Escalar</h3>
+                <p>Optimización continua y crecimiento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="planes" class="reveal">
+        <div style="text-align:center; margin-bottom: 3rem;">
+            <div class="section-tag" style="justify-content:center;">Planes mensuales</div>
+            <h2 class="section-title" style="margin: 0 auto 1rem;">Invertí en el crecimiento<br>de tu marca</h2>
+            <p class="section-desc" style="margin: 0 auto;">Planes flexibles diseñados para cada etapa de tu emprendimiento. Sin contratos largos.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Basic -->
+            <div class="pricing-card">
+                <div class="pricing-name">Básico</div>
+                <div class="pricing-desc">Para empezar con presencia digital</div>
+                <div class="pricing-amount"><span class="currency">$</span>360.000</div>
+                <div class="pricing-period">ARS / mes</div>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>12 publicaciones mensuales</li>
+                    <li>4 Reels editados</li>
+                    <li>Diseño gráfico profesional</li>
+                    <li>Reporte mensual de métricas</li>
+                </ul>
+                <a href="https://wa.me/5411278526291?text=Hola!%20Quiero%20saber%20más%20del%20Plan%20Básico" class="pricing-btn outline">Consultar →</a>
+            </div>
+
+            <!-- Professional -->
+            <div class="pricing-card featured">
+                <div class="pricing-popular">⚡ Más elegido</div>
+                <div class="pricing-name">Profesional</div>
+                <div class="pricing-desc">Crecimiento acelerado con estrategia</div>
+                <div class="pricing-amount"><span class="currency">$</span>489.000</div>
+                <div class="pricing-period">ARS / mes</div>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>16 publicaciones mensuales</li>
+                    <li>8 Reels editados</li>
+                    <li>Estrategia de crecimiento orgánico</li>
+                    <li>Optimización mensual continua</li>
+                </ul>
+                <a href="https://wa.me/5411278526291?text=Hola!%20Me%20interesa%20el%20Plan%20Profesional" class="pricing-btn primary">Empezar ahora →</a>
+            </div>
+
+            <!-- Premium -->
+            <div class="pricing-card">
+                <div class="pricing-name">Premium</div>
+                <div class="pricing-desc">El paquete completo para escalar</div>
+                <div class="pricing-amount"><span class="currency">$</span>620.000</div>
+                <div class="pricing-period">ARS / mes</div>
+                <div class="pricing-divider"></div>
+                <ul class="pricing-features">
+                    <li>Todo lo del plan Profesional</li>
+                    <li>Automatizaciones avanzadas</li>
+                    <li>Estrategia de crecimiento integral</li>
+                    <li>Soporte prioritario</li>
+                </ul>
+                <a href="https://wa.me/5411278526291?text=Hola!%20Me%20interesa%20el%20Plan%20Premium" class="pricing-btn outline">Consultar →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / CONTACT -->
+    <section id="contacto" class="cta-section reveal">
+        <div class="cta-glow"></div>
+        <div class="section-tag" style="justify-content:center;">¿Empezamos?</div>
+        <h2 class="section-title">Solicitá tu consulta<br>gratuita hoy</h2>
+        <p class="section-desc">Analizo tu perfil de Instagram, tu competencia y tu contenido sin costo. En 24h tenés un diagnóstico claro con acciones concretas para crecer.</p>
+
+        <a href="https://wa.me/5411278526291?text=Hola!%20Quiero%20solicitar%20mi%20consulta%20gratuita" class="btn-primary btn-pulse" style="position:relative; z-index:2; font-size: 1.1rem; padding: 1.2rem 2.8rem;">
+            🔍 Solicitar consulta GRATIS →
+        </a>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem; position: relative; z-index: 2;">Sin compromiso · Respuesta en 24h · 100% personalizado</p>
+
+        <div class="contact-cards">
+            <a href="mailto:upwise.com@gmail.com" class="contact-card">
+                <div class="contact-icon email">✉️</div>
+                <div>
+                    <div class="contact-info-label">Email</div>
+                    <div class="contact-info-value">upwise.com@gmail.com</div>
+                </div>
+            </a>
+            <a href="https://wa.me/5411278526291" class="contact-card">
+                <div class="contact-icon whatsapp">💬</div>
+                <div>
+                    <div class="contact-info-label">WhatsApp</div>
+                    <div class="contact-info-value">+54 11 2785-2691</div>
+                </div>
+            </a>
+            <div class="contact-card">
+                <div class="contact-icon location">📍</div>
+                <div>
+                    <div class="contact-info-label">Atención</div>
+                    <div class="contact-info-value">Emprendedores, creadores y marcas personales</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING WHATSAPP CTA -->
+    <a href="https://wa.me/5411278526291?text=Hola!%20Quiero%20solicitar%20mi%20consulta%20gratuita" class="floating-cta">
+        <div class="floating-cta-dot"></div>
+        💬 Consulta Gratis
+    </a>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 <span>UPWISE</span> — Crecimiento orgánico en Instagram para emprendedores y creadores</p>
+    </footer>
+
+    <!-- SCROLL REVEAL -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
